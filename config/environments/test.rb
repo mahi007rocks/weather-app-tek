@@ -2,7 +2,8 @@
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
-
+require "active_support/core_ext/integer/time"
+require "active_support/core_ext/numeric/bytes"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -20,7 +21,10 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-  config.cache_store = :null_store
+ # config/environments/test.rb
+  config.action_controller.perform_caching = true
+  config.cache_store = :memory_store, { size: 64.megabytes }
+
 
   # Render exception templates for rescuable exceptions and raise for other exceptions.
   config.action_dispatch.show_exceptions = :rescuable
