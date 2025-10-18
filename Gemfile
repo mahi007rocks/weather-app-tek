@@ -13,3 +13,5 @@ group :development, :test do
 end
 
 gem "propshaft", "~> 1.3"
+
+gem "sqlite3", "~> 2.1", :groups => [:development, :test]
