@@ -9,3 +9,18 @@
 <% if flash[:alert] %>
   <p style="color:#b00"><%= flash[:alert] %></p>
 <% end %>
+
+<% if @result %>
+  <div style="margin-top:1rem; padding:1rem; border:1px solid #ddd;">
+    <p><strong>ZIP:</strong> <%= @result[:zip] %></p>
+    <p><strong>Current:</strong> <%= @result[:current_temp_c] %> °C</p>
+    <p><strong>High:</strong> <%= @result[:high_c] %> °C</p>
+    <p><strong>Low:</strong> <%= @result[:low_c] %> °C</p>
+    <p><strong>Summary:</strong> <%= @result[:summary] %></p>
+    <% if @result[:from_cache] %>
+      <span style="padding:0.2rem 0.5rem; background:#eef7ee; border:1px solid #a5d6a7; border-radius:4px;">
+        served from cache
+      </span>
+    <% end %>
+  </div>
+<% end %>
