@@ -1,0 +1,11 @@
+<h1>Weather Forecast</h1>
+
+<%= form_with url: forecasts_path, method: :post, local: true do %>
+  <label for="address">Enter address</label><br>
+  <%= text_field_tag :address, @address, placeholder: "1 Apple Park Way, Cupertino" %>
+  <%= submit_tag "Get Forecast" %>
+<% end %>
+
+<% if flash[:alert] %>
+  <p style="color:#b00"><%= flash[:alert] %></p>
+<% end %>
