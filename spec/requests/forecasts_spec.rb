@@ -2,7 +2,7 @@ require "rails_helper"
 require "webmock/rspec"
 
 RSpec.describe "Forecasts", type: :request do
-  describe "POST /forecasts" do
+  describe "GET /forecasts" do
     let(:address) { "1 Apple Park Way, Cupertino, CA" }
 
     before do
@@ -22,7 +22,7 @@ RSpec.describe "Forecasts", type: :request do
         headers: { "Content-Type" => "application/json" }
       )
 
-      post "/forecasts", params: { address: address }
+      get "/forecasts", params: { address: address }
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Current:")
       expect(Rails.cache.exist?("forecast:zip:95014")).to be true
@@ -42,7 +42,7 @@ RSpec.describe "Forecasts", type: :request do
     it "shows a friendly message when ZIP cannot be resolved" do
         allow(Geocoding::GeocodeAddress).to receive(:call).and_return(nil)
 
-        post "/forecasts", params: { address: "Some Unknown Place" }
+        get "/forecasts", params: { address: "Some Unknown Place" }
 
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("Could not resolve ZIP for that address.")

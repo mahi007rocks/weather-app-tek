@@ -1,4 +1,6 @@
 class ForecastsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:index]
+  
   def index
     @address = params[:address].to_s.strip.presence
     return unless @address
