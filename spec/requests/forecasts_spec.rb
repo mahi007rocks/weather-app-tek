@@ -38,5 +38,14 @@ RSpec.describe "Forecasts", type: :request do
       post "/forecasts", params: { address: address }
       expect(response.body).to include("served from cache")
     end
+
+    it "shows a friendly message when ZIP cannot be resolved" do
+        allow(Geocoding::GeocodeAddress).to receive(:call).and_return(nil)
+
+        post "/forecasts", params: { address: "Some Unknown Place" }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("Could not resolve ZIP for that address.")
+    end
   end
 end

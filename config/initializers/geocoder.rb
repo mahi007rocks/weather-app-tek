@@ -4,4 +4,5 @@ Geocoder.configure(
   # Defaults to :nominatim. For higher reliability, switch to Google/Mapbox:
   # lookup: :google, api_key: ENV["GOOGLE_GEOCODING_API_KEY"],
   # lookup: :mapbox, api_key: ENV["MAPBOX_TOKEN"],
+  http_headers: { "User-Agent" => "weather-app-tek (github.com/mahi007rocks)" }
 )
